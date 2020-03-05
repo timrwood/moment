@@ -7,12 +7,15 @@ export var defaultLongDateFormat = {
     LLLL : 'dddd, MMMM D, YYYY h:mm A'
 };
 
-export function longDateFormat (key) {
+import isFunction from '../utils/is-function';
+
+export function longDateFormat (key, mom, now) {
+
     var format = this._longDateFormat[key],
         formatUpper = this._longDateFormat[key.toUpperCase()];
 
     if (format || !formatUpper) {
-        return format;
+        return isFunction(format) ? format.call(mom, now) : format;
     }
 
     this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
