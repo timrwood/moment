@@ -433,12 +433,12 @@
         LLLL : 'dddd, MMMM D, YYYY h:mm A'
     };
 
-    function longDateFormat (key, mom, now) {
+    function longDateFormat (key) {
         var format = this._longDateFormat[key],
             formatUpper = this._longDateFormat[key.toUpperCase()];
 
         if (format || !formatUpper) {
-            return isFunction(format) ? format.call(mom, now) : format;
+            return format;
         }
 
         this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
