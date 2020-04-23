@@ -20,18 +20,18 @@
             LTS : 'HH:mm:ss',
             L : 'DD/MM/YYYY',
             LL : 'D [de] MMMM [de] YYYY',
-            LLL : 'D [de] MMMM [de] YYYY [às] HH:mm',
-            LLLL : 'dddd, D [de] MMMM [de] YYYY [às] HH:mm'
+            LLL : function() { return 'D [de] MMMM [de] YYYY ' + (this.hours() < 2 ? '[à]' : '[às]') + ' HH:mm';},
+            LLLL : function() { return 'dddd, D [de] MMMM [de] YYYY ' + (this.hours() < 2 ? '[à]' : '[às]') + ' HH:mm';},
         },
         calendar : {
-            sameDay: '[Hoje às] LT',
-            nextDay: '[Amanhã às] LT',
-            nextWeek: 'dddd [às] LT',
-            lastDay: '[Ontem às] LT',
+            sameDay: function() { return '[Hoje] ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT'; },
+            nextDay: function() { return '[Amanhã] ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT'; },
+            nextWeek: function() { return 'dddd ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT'; },
+            lastDay: function() { return '[Ontem] ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT'; },
             lastWeek: function () {
                 return (this.day() === 0 || this.day() === 6) ?
-                    '[Último] dddd [às] LT' : // Saturday + Sunday
-                    '[Última] dddd [às] LT'; // Monday - Friday
+                    '[Último] dddd ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT': // Saturday + Sunday
+                    '[Última] dddd ' + (this.hours() < 2 ? '[à]' : '[às]') + ' LT'; // Monday - Friday
             },
             sameElse: 'L'
         },
